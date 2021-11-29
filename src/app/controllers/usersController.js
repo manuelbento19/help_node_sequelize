@@ -26,10 +26,10 @@ Routes.post("/",async(req,res)=>{
 //Actualizando
 Routes.put("/:id",async(req,res)=>{
     const {id} = req.params
-    const user = await db.users.findByPk(id)
-    user = req.body
-    const result = await db.users.save()
-    res.send(result)
+    const result = await db.users.update(req.body,{
+        where:{id}
+    })
+    res.send(await db.users.findByPk(id))
 })
 
 //Deletando
