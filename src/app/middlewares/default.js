@@ -11,7 +11,7 @@ module.exports = (req,res,next) =>{
     
     const [esquema,token] = partsToken;
 
-    if(!/^manuelbento19$/i.test(esquema))
+    if(!/^Nelito$/i.test(esquema))
     return res.status(401).send({erro:"Token mal formatado"});
 
     if(token!="manuelbento19")
