@@ -2,25 +2,23 @@ const express = require('express');
 const Routes = express.Router();
 const db = require('./../../models/index');
 
-const User = db.Users;
 
-//Pegando todos os Users
+//Pegando todos os registros
 Routes.get("/",async(req,res)=>{
     const users = await db.users.findAll()
     res.send(users)
 })
 
-//Pegando apenas um User
+//Pegando apenas 1 registro
 Routes.get("/:id",async(req,res)=>{
-    const {id} = req.params
-    const user = await db.users.findByPk(id)
-    res.send(user)
+    const {id} = req.params;
+    res.status(200).send(await db.users.findByPk(id))
 })
 
 //Cadastrando
 Routes.post("/",async(req,res)=>{
     const result = await db.users.create(req.body);
-    res.send(result);
+    res.status(200).send(result);
 })
 
 //Actualizando
@@ -38,6 +36,5 @@ Routes.delete("/:id",(req,res)=>{
     db.users.destroy({where:{id}})
     res.send()
 })
-
 
 module.exports = route => route.use('/users',Routes);
