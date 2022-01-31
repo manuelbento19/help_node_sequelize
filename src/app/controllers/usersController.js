@@ -27,14 +27,14 @@ Routes.put("/:id",async(req,res)=>{
     const result = await db.users.update(req.body,{
         where:{id}
     })
-    res.send(await db.users.findByPk(id))
+    res.status(200).send(result)
 })
 
 //Deletando
 Routes.delete("/:id",(req,res)=>{
     const {id} = req.params 
-    db.users.destroy({where:{id}})
-    res.send()
+    const result = await db.users.destroy({where:{id}})
+    res.send(result)
 })
 
 module.exports = route => route.use('/users',Routes);
