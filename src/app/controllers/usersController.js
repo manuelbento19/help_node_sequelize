@@ -6,7 +6,7 @@ const db = require('./../../models/index');
 //Pegando todos os registros
 Routes.get("/",async(req,res)=>{
     const users = await db.users.findAll()
-    res.send(users)
+    res.status(200).send(users)
 })
 
 //Pegando apenas 1 registro
@@ -31,10 +31,10 @@ Routes.put("/:id",async(req,res)=>{
 })
 
 //Deletando
-Routes.delete("/:id",(req,res)=>{
+Routes.delete("/:id",async(req,res)=>{
     const {id} = req.params 
     const result = await db.users.destroy({where:{id}})
-    res.send(result)
+    res.status(200).send(result)
 })
 
 module.exports = route => route.use('/users',Routes);
