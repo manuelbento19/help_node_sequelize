@@ -5,26 +5,26 @@ const db = require('./../../models/index');
 
 //Pegando todos os registros
 Routes.get("/",async(req,res)=>{
-    const users = await db.users.findAll()
+    const users = await db.tests.findAll()
     res.status(200).send(users)
 })
 
 //Pegando apenas 1 registro
 Routes.get("/:id",async(req,res)=>{
     const {id} = req.params;
-    res.status(200).send(await db.users.findByPk(id))
+    res.status(200).send(await db.tests.findByPk(id))
 })
 
 //Cadastrando
 Routes.post("/",async(req,res)=>{
-    const result = await db.users.create(req.body);
+    const result = await db.tests.create(req.body);
     res.status(200).send(result);
 })
 
 //Actualizando
 Routes.put("/:id",async(req,res)=>{
     const {id} = req.params
-    const result = await db.users.update(req.body,{
+    const result = await db.tests.update(req.body,{
         where:{id}
     })
     res.status(200).send(result)
@@ -33,8 +33,8 @@ Routes.put("/:id",async(req,res)=>{
 //Deletando
 Routes.delete("/:id",async(req,res)=>{
     const {id} = req.params 
-    const result = await db.users.destroy({where:{id}})
+    const result = await db.tests.destroy({where:{id}})
     res.status(200).send(result)
 })
 
-module.exports = route => route.use('/users',Routes);
+module.exports = route => route.use('/tests',Routes);
