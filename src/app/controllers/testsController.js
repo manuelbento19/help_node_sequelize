@@ -5,8 +5,8 @@ const db = require('./../../models/index');
 
 //Pegando todos os registros
 Routes.get("/",async(req,res)=>{
-    const users = await db.tests.findAll()
-    res.status(200).send(users)
+    const result = await db.tests.findAll()
+    res.status(200).send(result)
 })
 
 //Pegando apenas 1 registro
